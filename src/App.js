@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { useSelector } from "react-redux";
 
-function App() {
+// mui core
+import LinearProgress from "@mui/material/LinearProgress";
+
+// routes
+import RoutesMain from "routes/Routes";
+
+export default function MiniDrawer() {
+  const showLoading = useSelector((state) => state.app.showLoading);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <RoutesMain />
+
+      {showLoading && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 9999,
+            width: "100%",
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <LinearProgress />
+        </div>
+      )}
+    </>
   );
 }
-
-export default App;
